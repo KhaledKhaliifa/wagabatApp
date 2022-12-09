@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="10dp"
+    android:layout_marginTop="18sp"
+    android:background="@drawable/item_border">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="392dp"
+        android:layout_height="127dp"
+        app:cardCornerRadius="25dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/restaurant_image"
+            android:layout_width="match_parent"
+            android:layout_height="134dp"
+            app:srcCompat="@drawable/food_pic_1" />
+
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/restaurant_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="12dp"
+        android:text="Restaurant Name"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView" />
+
+    <TextView
+        android:id="@+id/restaurant_specialty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="4dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="4dp"
+        android:text="Breakfast, Egyptian"
+        android:textColor="#AFAAAA"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/restaurant_name" />
+
+    <TextView
+        android:id="@+id/restaurant_rating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="4dp"
+        android:layout_marginEnd="16dp"
+        android:text="5.0"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/restaurant_name" />
+
+    <TextView
+        android:id="@+id/restaurant_specialty4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="4dp"
+        android:layout_marginTop="12dp"
+        android:text="30 mins"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/restaurant_specialty"
+        app:layout_constraintTop_toBottomOf="@+id/restaurant_specialty" />
+
+    <TextView
+        android:id="@+id/restaurant_delivery_fee"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4sp"
+        android:text="EGP 15.00"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/restaurant_name"
+        app:layout_constraintTop_toBottomOf="@+id/restaurant_specialty" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

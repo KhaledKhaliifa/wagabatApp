@@ -20,4 +20,5 @@
     <string name="totalAmountText">Total amount</string>
     <string name="add_items">Add Items</string>
     <string name="checkoutBtn">Checkout</string>
+    <string name="all_restaurants">All Restaurants</string>
 </resources>

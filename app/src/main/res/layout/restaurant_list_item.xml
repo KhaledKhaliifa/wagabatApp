@@ -98,7 +98,16 @@
         app:layout_constraintEnd_toStartOf="@+id/restaurant_delivery_fee"
         app:layout_constraintHorizontal_bias="0.9"
         app:layout_constraintStart_toEndOf="@+id/restaurant_delivery_time"
-        app:srcCompat="@drawable/delivery"
+        app:srcCompat="@drawable/delivery_outlined"
         tools:layout_editor_absoluteY="196dp" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/restaurant_rating"
+        app:layout_constraintEnd_toStartOf="@+id/restaurant_rating"
+        app:layout_constraintTop_toTopOf="@+id/restaurant_rating"
+        app:srcCompat="@drawable/star" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

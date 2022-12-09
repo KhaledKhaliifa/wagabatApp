@@ -9,16 +9,11 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
-        android:layout_width="0dp"
-        android:layout_height="75dp"
-        android:layout_marginEnd="32dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         app:cardCornerRadius="15dp"
-        app:layout_constraintBottom_toBottomOf="@+id/item_price"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/item_price"
-        app:layout_constraintTop_toTopOf="@+id/dish_name"
-        app:layout_constraintVertical_bias="0.0">
-
+        tools:layout_editor_absoluteX="263dp"
+        tools:layout_editor_absoluteY="7dp">
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -32,41 +27,30 @@
         android:id="@+id/dish_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="37dp"
         android:text="Caesar Salad"
+        android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/item_price"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        tools:layout_editor_absoluteX="26dp"
+        tools:layout_editor_absoluteY="28dp" />
 
     <TextView
         android:id="@+id/item_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="204dp"
-        android:layout_marginBottom="18dp"
         android:text="EGP 30.00"
+        android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/view7"
-        app:layout_constraintEnd_toStartOf="@+id/cardView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dish_name" />
+        tools:layout_editor_absoluteX="26dp"
+        tools:layout_editor_absoluteY="55dp" />
 
     <View
         android:id="@+id/view7"
         style="@style/Divider"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="10dp"
+        android:layout_width="392dp"
+        android:layout_height="1dp"
         android:background="@android:color/darker_gray"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/item_price" />
+
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="123dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

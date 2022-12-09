@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -54,22 +55,10 @@
         app:layout_constraintTop_toBottomOf="@+id/dish_name_extended" />
 
     <TextView
-        android:id="@+id/restaurant_rating"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginVertical="4dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="8dp"
-        android:text="5.0"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/dish_description_extended"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <TextView
         android:id="@+id/item_count_extended"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="52dp"
+        android:layout_marginStart="56dp"
         android:text="1"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/restaurant_delivery_fee"
@@ -115,5 +104,31 @@
         app:layout_constraintStart_toStartOf="@+id/add_to_cart_button"
         app:layout_constraintTop_toTopOf="@+id/add_to_cart_button"
         app:layout_constraintVertical_bias="0.448" />
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="15sp"
+        android:layout_height="15sp"
+        android:layout_marginLeft="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/item_count_extended"
+        app:layout_constraintEnd_toStartOf="@+id/restaurant_delivery_fee"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/item_count_extended"
+        app:layout_constraintTop_toTopOf="@+id/item_count_extended"
+        app:layout_constraintVertical_bias="0.571"
+        app:srcCompat="@drawable/plus_sign" />
+
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="15sp"
+        android:layout_height="15sp"
+        android:layout_marginRight="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/item_count_extended"
+        app:layout_constraintEnd_toStartOf="@+id/item_count_extended"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/item_count_extended"
+        app:layout_constraintVertical_bias="0.571"
+        app:srcCompat="@drawable/minus_sign" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

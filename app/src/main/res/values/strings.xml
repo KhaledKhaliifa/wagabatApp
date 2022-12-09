@@ -21,4 +21,6 @@
     <string name="add_items">Add Items</string>
     <string name="checkoutBtn">Checkout</string>
     <string name="all_restaurants">All Restaurants</string>
+    <string name="place_order">Place Order</string>
+    <string name="pay_with">Pay with</string>
 </resources>

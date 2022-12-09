@@ -62,24 +62,43 @@
         app:layout_constraintTop_toTopOf="@+id/restaurant_name" />
 
     <TextView
-        android:id="@+id/restaurant_specialty4"
+        android:id="@+id/restaurant_delivery_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginVertical="4dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
         android:text="30 mins"
         android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="@+id/restaurant_specialty"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toBottomOf="@+id/restaurant_specialty" />
 
     <TextView
         android:id="@+id/restaurant_delivery_fee"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4sp"
         android:text="EGP 15.00"
+        android:textColor="#808080 "
         android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="@+id/restaurant_name"
-        app:layout_constraintTop_toBottomOf="@+id/restaurant_specialty" />
+        tools:layout_editor_absoluteX="159dp"
+        tools:layout_editor_absoluteY="196dp" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@+id/restaurant_specialty"
+        app:srcCompat="@drawable/time"
+        tools:layout_editor_absoluteY="196dp" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toStartOf="@+id/restaurant_delivery_fee"
+        app:layout_constraintHorizontal_bias="0.9"
+        app:layout_constraintStart_toEndOf="@+id/restaurant_delivery_time"
+        app:srcCompat="@drawable/delivery"
+        tools:layout_editor_absoluteY="196dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

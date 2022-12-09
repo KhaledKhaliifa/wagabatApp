@@ -26,29 +26,32 @@
     </androidx.cardview.widget.CardView>
 
     <TextView
-        android:id="@+id/restaurant_name"
+        android:id="@+id/dish_name_extended"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="12dp"
-        android:text="Restaurant Name"
+        android:text="Caesar Salad"
         android:textSize="22sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView" />
 
     <TextView
-        android:id="@+id/restaurant_specialty"
-        android:layout_width="wrap_content"
+        android:id="@+id/dish_description_extended"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="12dp"
         android:layout_marginVertical="4dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="4dp"
-        android:text="Breakfast, Egyptian"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="12dp"
+        android:text="Green salad of romaine lettuce and croutons dressed with lemon juice, olive olie, egg, Worchestire sauce, anchovies, garlic, dijon mustard, parmesan cheese and black pepper "
         android:textColor="#AFAAAA"
         android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/restaurant_name" />
+        app:layout_constraintTop_toBottomOf="@+id/dish_name_extended" />
 
     <TextView
         android:id="@+id/restaurant_rating"
@@ -56,30 +59,61 @@
         android:layout_height="wrap_content"
         android:layout_marginVertical="4dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
         android:text="5.0"
         android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/restaurant_name" />
+        app:layout_constraintBottom_toTopOf="@+id/dish_description_extended"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
-        android:id="@+id/restaurant_specialty4"
+        android:id="@+id/item_count_extended"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="4dp"
-        android:layout_marginTop="12dp"
-        android:text="30 mins"
+        android:layout_marginStart="52dp"
+        android:text="1"
         android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="@+id/restaurant_specialty"
-        app:layout_constraintTop_toBottomOf="@+id/restaurant_specialty" />
+        app:layout_constraintBottom_toBottomOf="@+id/restaurant_delivery_fee"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dish_description_extended"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/restaurant_delivery_fee"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4sp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="16dp"
         android:text="EGP 15.00"
         android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="@+id/restaurant_name"
-        app:layout_constraintTop_toBottomOf="@+id/restaurant_specialty" />
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dish_description_extended" />
+
+    <Button
+        android:id="@+id/add_to_cart_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Add to Cart"
+        android:textAlignment="viewEnd"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:backgroundTint="@color/purple_700"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/item_count_extended" />
+
+    <TextView
+        android:id="@+id/total_item_cost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:elevation="100dp"
+        android:text="EGP 15.00"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/add_to_cart_button"
+        app:layout_constraintStart_toStartOf="@+id/add_to_cart_button"
+        app:layout_constraintTop_toTopOf="@+id/add_to_cart_button"
+        app:layout_constraintVertical_bias="0.448" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -20,13 +20,18 @@
         app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:background="@drawable/item_border"
-        android:layout_marginHorizontal="12sp"
+        android:id="@+id/constraintLayout2"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="12sp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="12dp"
+        android:background="@drawable/item_border"
         android:paddingVertical="12sp"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="240dp">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
 
         <ImageView
             android:id="@+id/imageButton2"
@@ -45,10 +50,47 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:text="Within 30 mins"
-            app:layout_constraintBottom_toBottomOf="parent"
             android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imageButton2"
             app:layout_constraintTop_toTopOf="@+id/imageButton2" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="12sp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="122dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="366dp"
+        android:background="@drawable/item_border"
+        app:layout_constraintBottom_toTopOf="@+id/subtotalAmount"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/location" />
+
+        <TextView
+            android:id="@+id/textView14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:text="User Address \nMobile Number"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView4"
+            app:layout_constraintStart_toEndOf="@+id/imageView4"
+            app:layout_constraintTop_toTopOf="@+id/imageView4"
+            app:layout_constraintVertical_bias="0.4" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
@@ -56,7 +98,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:layout_marginBottom="1dp"
         android:text="Checkout"
         android:textSize="22sp"
         android:textStyle="bold"
@@ -69,24 +110,26 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="188dp"
         android:text="@string/payment_summary_text"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="502dp" />
+        app:layout_constraintTop_toBottomOf="@+id/payment_options" />
 
     <TextView
         android:id="@+id/payment_options"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="12dp"
-        android:layout_marginStart="12dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
         android:text="@string/pay_with"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="321dp" />
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
 
     <TextView
         android:id="@+id/textView8"
@@ -120,13 +163,27 @@
         app:layout_constraintTop_toBottomOf="@+id/paymentSummaryText" />
 
     <TextView
+        android:id="@+id/subtotalAmount2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="174dp"
+        android:text="EGP 0.00"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
+        app:layout_constraintVertical_bias="0.898" />
+
+    <TextView
         android:id="@+id/subtotalAmount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="12dp"
+        android:layout_marginBottom="174dp"
         android:text="EGP 0.00"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:layout_editor_absoluteY="538dp" />
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
     <TextView
         android:id="@+id/deliveryFeeAmount"
@@ -148,8 +205,7 @@
         android:text="EGP 0.00"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView8"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="@+id/textView8" />
 
     <Button
         android:id="@+id/place_order_button"
@@ -167,21 +223,25 @@
 
 
     <RadioGroup
+        android:id="@+id/radioGroup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="12sp"
         android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
 
+        app:layout_constraintBottom_toTopOf="@+id/paymentSummaryText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.666"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="360dp">
+        app:layout_constraintTop_toBottomOf="@+id/payment_options"
+        app:layout_constraintVertical_bias="0.173">
 
         <RadioButton
             android:id="@+id/radioButton1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/item_border"
             android:layout_marginBottom="8sp"
+            android:background="@drawable/item_border"
 
             android:text="Credit Card"
             tools:layout_editor_absoluteX="12dp"
@@ -195,6 +255,7 @@
             android:text="Cash on Delivery"
             tools:layout_editor_absoluteX="12dp"
             tools:layout_editor_absoluteY="124dp" />
+
 
     </RadioGroup>
 

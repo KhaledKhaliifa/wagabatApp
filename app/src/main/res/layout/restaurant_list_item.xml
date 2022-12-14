@@ -81,26 +81,28 @@
         android:text="EGP 15.00"
         android:textColor="#808080 "
         android:textSize="16sp"
-        tools:layout_editor_absoluteX="159dp"
-        tools:layout_editor_absoluteY="196dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.288"
+        app:layout_constraintStart_toEndOf="@+id/restaurant_delivery_time" />
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/restaurant_specialty"
-        app:srcCompat="@drawable/time"
-        tools:layout_editor_absoluteY="196dp" />
+        app:srcCompat="@drawable/time" />
 
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/restaurant_delivery_fee"
         app:layout_constraintHorizontal_bias="0.9"
         app:layout_constraintStart_toEndOf="@+id/restaurant_delivery_time"
-        app:srcCompat="@drawable/delivery_outlined"
-        tools:layout_editor_absoluteY="196dp" />
+        app:srcCompat="@drawable/delivery_outlined" />
 
     <ImageView
         android:id="@+id/imageView3"

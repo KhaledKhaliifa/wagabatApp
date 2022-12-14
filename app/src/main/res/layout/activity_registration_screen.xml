@@ -49,6 +49,7 @@
         android:layout_marginTop="12dp"
         android:layout_marginEnd="49dp"
         android:background="#30ffffff"
+        android:inputType="textPassword"
         android:drawablePadding="20dp"
         android:hint="@string/confirm_password"
         android:padding="20dp"
@@ -64,6 +65,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="50dp"
+        android:inputType="textPassword"
         android:layout_marginStart="49dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="49dp"
@@ -76,10 +78,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/register_username_field" />
+        app:layout_constraintTop_toBottomOf="@+id/register_email_field" />
 
     <EditText
-        android:id="@+id/register_username_field"
+        android:id="@+id/register_email_field"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="50dp"
@@ -88,7 +90,7 @@
         android:layout_marginEnd="49dp"
         android:background="#30ffffff"
         android:drawablePadding="20dp"
-        android:hint="@string/username_text"
+        android:hint="@string/email_string"
         android:padding="20dp"
         android:textColor="@color/white"
         android:textColorHint="@color/white"

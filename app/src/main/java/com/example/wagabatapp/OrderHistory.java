@@ -4,11 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class RestaurantItemExpanded extends AppCompatActivity {
+public class OrderHistory extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_restaurant_item_expanded);
+        setContentView(R.layout.activity_order_history);
     }
 }

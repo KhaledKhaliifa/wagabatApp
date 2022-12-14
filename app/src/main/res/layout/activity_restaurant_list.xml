@@ -3,24 +3,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".RestaurantList">
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:layout_marginBottom="5dp"
-        android:text="Restaurant Name"
+        android:layout_marginBottom="1dp"
+        android:text="@string/all_restaurants"
         android:textSize="22sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerView2"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerView3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView2"
+        android:id="@+id/recyclerView3"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="1dp"
@@ -30,5 +31,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2"
-        tools:listitem="@layout/restaurant_menu_item" />
+        tools:listitem="@layout/restaurant_list_item" />
 </androidx.constraintlayout.widget.ConstraintLayout>

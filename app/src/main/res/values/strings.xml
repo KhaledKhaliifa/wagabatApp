@@ -34,4 +34,6 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="email_string">Email</string>
     <string name="forgot_password">Forgot password?</string>
+    <string name="change_my_password">Send Password Reset Email</string>
+    <string name="type_your_email">Type your email</string>
 </resources>

@@ -7,7 +7,9 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.wagabatapp.databinding.ActivityLoginBinding;
@@ -72,7 +74,11 @@ public class RegistrationScreen extends AppCompatActivity {
                         @Override
                         public void onFailure(@NonNull Exception e) {
                             progressDialog.cancel();
-                            Toast.makeText(RegistrationScreen.this,e.getMessage(),Toast.LENGTH_SHORT).show();
+                            Toast toast = Toast.makeText(RegistrationScreen.this,e.getMessage(),Toast.LENGTH_SHORT);
+                            TextView v = (TextView) toast.getView().findViewById(android.R.id.message);
+                            if(v != null) v.setGravity(Gravity.CENTER);
+                            toast.show();
+
                         }
                     });
         }

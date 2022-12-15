@@ -47,13 +47,14 @@ public class RegistrationScreen extends AppCompatActivity {
         String confirm_password = binding.registerConfirmPassword.getText().toString();
         String address = binding.registerAddress.getText().toString();
         String number = binding.registerPhoneNumber.getText().toString();
+
         if(TextUtils.isEmpty(name) || TextUtils.isEmpty(email) ||
                 TextUtils.isEmpty(password) || TextUtils.isEmpty(confirm_password) ||
                 TextUtils.isEmpty(address) || TextUtils.isEmpty(number)){
             Toast.makeText(RegistrationScreen.this,"Please make sure to fill out all boxes!", Toast.LENGTH_SHORT).show();
         }
         else if(!password.equals(confirm_password)){
-            Toast.makeText(RegistrationScreen.this,"Please make sure passwords match!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(RegistrationScreen.this,"Passwords don't match", Toast.LENGTH_SHORT).show();
         }
         else{
             progressDialog.setMessage("Registering user...");

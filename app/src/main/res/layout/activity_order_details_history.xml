@@ -48,7 +48,7 @@
         android:textColor="#71B64B"
         android:textSize="12sp"
         app:layout_constraintStart_toEndOf="@+id/imageView10"
-        app:layout_constraintTop_toBottomOf="@+id/restaurant_name_history" />
+        app:layout_constraintTop_toBottomOf="@+id/restaurant_name_in_details" />
 
     <TextView
         android:id="@+id/order_id_history"
@@ -62,7 +62,7 @@
         app:layout_constraintTop_toBottomOf="@+id/order_date_history" />
 
     <TextView
-        android:id="@+id/restaurant_name_history"
+        android:id="@+id/restaurant_name_in_details"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"

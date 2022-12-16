@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
 
 import com.example.wagabatapp.databinding.ActivityLoginBinding;
 import com.example.wagabatapp.databinding.ActivityRestaurantMenuBinding;
@@ -21,6 +22,8 @@ public class RestaurantMenu extends AppCompatActivity {
     ActivityRestaurantMenuBinding binding;
     DatabaseReference databaseReference;
     String restaurantPosition;
+    String restaurantName;
+
 
 
     @Override
@@ -29,14 +32,15 @@ public class RestaurantMenu extends AppCompatActivity {
         binding = ActivityRestaurantMenuBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         restaurantPosition = getIntent().getStringExtra("position");
-        databaseReference = FirebaseDatabase.getInstance("https://wagbaapp-default-rtdb.europe-west1.firebasedatabase.app/").getReference("restaurants/restaurant"+restaurantPosition+"/");
+        applyRestaurantName();
+        databaseReference = FirebaseDatabase.getInstance("https://wagbaapp-default-rtdb.europe-west1.firebasedatabase.app/")
+                .getReference("restaurants/restaurant"+restaurantPosition+"/");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot dataSnapshot: snapshot.getChildren()){
-                    RestaurantModel restaurant = dataSnapshot.getValue(RestaurantModel.class);
+                    //RestaurantModel restaurant = dataSnapshot.getValue(RestaurantModel.class);
 
-                    Log.d("Gaber", restaurant.getName().toString());
                 }
             }
 
@@ -45,6 +49,26 @@ public class RestaurantMenu extends AppCompatActivity {
 
             }
         });
+
+    }
+    public void applyRestaurantName(){
+        databaseReference = FirebaseDatabase.getInstance("https://wagbaapp-default-rtdb.europe-west1.firebasedatabase.app/")
+                .getReference("restaurants/restaurant"+restaurantPosition+"/name");
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                restaurantName = snapshot.getValue().toString();
+                Log.d("Gaber", restaurantName);
+                binding.restaurantNameInDishes.setText(restaurantName);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                restaurantName = "Missing Restaurant Name";
+                binding.restaurantNameInDishes.setText(restaurantName);
+            }
+        });
+
 
     }
 }

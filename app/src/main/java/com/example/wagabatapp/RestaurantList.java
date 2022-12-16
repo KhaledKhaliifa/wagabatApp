@@ -37,8 +37,6 @@ public class RestaurantList extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         list = new ArrayList<>();
         adapter = new RestaurantAdapter(list);
-        recyclerView.setAdapter(adapter);
-
 
         databaseReference = FirebaseDatabase.getInstance("https://wagbaapp-default-rtdb.europe-west1.firebasedatabase.app/").getReference("restaurants");
         databaseReference.addValueEventListener(new ValueEventListener() {
@@ -58,6 +56,7 @@ public class RestaurantList extends AppCompatActivity {
         });
 
 
+        recyclerView.setAdapter(adapter);
 
     }
 }

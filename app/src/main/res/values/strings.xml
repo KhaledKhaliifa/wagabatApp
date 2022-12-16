@@ -36,4 +36,5 @@
     <string name="forgot_password">Forgot password?</string>
     <string name="change_my_password">Send Password Reset Email</string>
     <string name="type_your_email">Type your email</string>
+    <string name="egp">EGP</string>
 </resources>

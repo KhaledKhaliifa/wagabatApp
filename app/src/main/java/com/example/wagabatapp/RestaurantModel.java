@@ -21,8 +21,6 @@ public class RestaurantModel {
         this.delivery_fee = delivery_fee;
         this.rating = rating;
         //this.imageLink = imageLink;
-
-
     }
 
 

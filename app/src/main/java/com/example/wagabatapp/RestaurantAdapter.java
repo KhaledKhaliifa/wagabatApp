@@ -40,7 +40,6 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
         holder.specialty.setText(restaurant.getSpecialty());
         holder.delivery_time.setText(restaurant.getDelivery_time());
         holder.delivery_fee.setText(restaurant.getDelivery_fee());
-
     }
 
 

@@ -7,7 +7,8 @@
     android:layout_marginHorizontal="10dp"
     android:paddingBottom="12sp"
     android:layout_marginTop="18sp"
-    android:background="@drawable/item_border">
+    android:background="@drawable/item_border"
+    >
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
@@ -17,6 +18,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+        <ImageView
+            android:id="@+id/restaurant_image"
+            android:layout_width="match_parent"
+            android:layout_height="134dp"
+            app:srcCompat="@drawable/food_pic_1" />
 
 
 

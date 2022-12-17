@@ -8,19 +8,19 @@ public class RestaurantModel {
     private String delivery_time;
     private String delivery_fee;
     private String rating;
-    //private String imageLink;
+    private String imageLink;
 
     public RestaurantModel(){
 
     }
 
-    public RestaurantModel( String name, String specialty, String delivery_time, String delivery_fee, String rating ) {
+    public RestaurantModel( String name, String specialty, String delivery_time, String delivery_fee, String rating, String imageLink ) {
         this.name = name;
         this.specialty = specialty;
         this.delivery_time = delivery_time;
         this.delivery_fee = delivery_fee;
         this.rating = rating;
-        //this.imageLink = imageLink;
+        this.imageLink = imageLink;
     }
 
 
@@ -44,8 +44,8 @@ public class RestaurantModel {
         return rating;
     }
 
-    //public String getImageLink() {
-        //return imageLink;
-    //}
+    public String getImageLink() {
+        return imageLink;
+    }
 
 }

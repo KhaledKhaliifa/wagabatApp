@@ -1,8 +1,11 @@
 package com.example.wagabatapp;
 import static android.content.ContentValues.TAG;
+import static android.content.Context.MODE_PRIVATE;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,7 +40,6 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
         context = parent.getContext();
 
         databaseReference = FirebaseDatabase.getInstance("https://wagbaapp-default-rtdb.europe-west1.firebasedatabase.app/").getReference("restaurants");
-        final String restaurant_key = databaseReference.getRef().toString();
 
         LayoutInflater inflater = LayoutInflater.from(context);
         view = inflater.inflate(R.layout.restaurant_list_item, parent,false);
@@ -47,7 +49,6 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-
         RestaurantModel restaurant = list.get(position);
 
         holder.name.setText(restaurant.getName());
@@ -55,10 +56,13 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
         holder.specialty.setText(restaurant.getSpecialty());
         holder.delivery_time.setText(restaurant.getDelivery_time());
         holder.delivery_fee.setText(restaurant.getDelivery_fee());
-
-
+        if(restaurant.getImageLink()!= null){
+            new DownloadImageTask( holder.image)
+                    .execute(restaurant.getImageLink());
+        }
 
     }
+
     @Override
     public int getItemCount() {
         return list.size();
@@ -67,6 +71,8 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView name,rating,specialty,delivery_time,delivery_fee;
+        ImageView image;
+        SharedPreferences prefs;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -76,13 +82,18 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
             specialty = itemView.findViewById(R.id.restaurant_specialty);
             delivery_time = itemView.findViewById(R.id.restaurant_delivery_time);
             delivery_fee = itemView.findViewById(R.id.restaurant_delivery_fee);
+            image = itemView.findViewById(R.id.restaurant_image);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    prefs = PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
+                    SharedPreferences.Editor editor = prefs.edit();
                     int position = getAdapterPosition();
+                    editor.putString("restaurant", Integer.toString(position));
+                    editor.commit();
                     Intent intent = new Intent(context, RestaurantMenu.class);
-                    intent.putExtra("position", Integer.toString(position));
+                    //intent.putExtra("position", Integer.toString(position));
                     context.startActivity(intent);
 
                 }

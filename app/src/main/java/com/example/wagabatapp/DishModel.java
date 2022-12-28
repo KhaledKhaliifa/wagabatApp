@@ -9,15 +9,21 @@ public class DishModel {
     String available;
     String description;
     String imageLink;
+    String itemCount;
+    String reference;
+
     public DishModel(){
 
     }
 
-    public DishModel(String name, String price, String available, String description, String imageLink) {
+    public DishModel(String name, String price, String available, String description, String imageLink,String itemCount, String reference) {
         this.name = name;
         this.price = price;
         this.available = available;
         this.description = description;
+        this.imageLink = imageLink;
+        this.itemCount = itemCount;
+        this.reference = reference;
     }
 
     public String getName() {
@@ -39,4 +45,10 @@ public class DishModel {
     public String getImageLink(){
         return imageLink;
     }
+
+    public String getItemCount(){
+        return itemCount;
+    }
+
+    public String getReference(){ return reference;}
 }

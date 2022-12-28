@@ -8,6 +8,7 @@ import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -61,6 +62,10 @@ public class DishAdapter extends RecyclerView.Adapter<DishAdapter.ViewHolder>  {
             holder.availability.setTextColor(Color.parseColor("#AA0000"));
 
         }
+        if(dish.getImageLink()!= null){
+            new DownloadImageTask( holder.image)
+                    .execute(dish.getImageLink());
+        }
 
 
     }
@@ -73,6 +78,7 @@ public class DishAdapter extends RecyclerView.Adapter<DishAdapter.ViewHolder>  {
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView name,price,availability;
+        ImageView image;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -80,6 +86,7 @@ public class DishAdapter extends RecyclerView.Adapter<DishAdapter.ViewHolder>  {
             name = itemView.findViewById(R.id.dish_name);
             price = itemView.findViewById(R.id.item_price);
             availability = itemView.findViewById(R.id.availability);
+            image = itemView.findViewById(R.id.dishIcon);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 SharedPreferences prefs;

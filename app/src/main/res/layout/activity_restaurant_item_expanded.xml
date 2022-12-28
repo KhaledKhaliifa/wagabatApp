@@ -15,7 +15,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="392dp"
-        android:layout_height="127dp"
+        android:layout_height="300dp"
         app:cardCornerRadius="25dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,8 +24,8 @@
         <ImageView
             android:id="@+id/restaurant_image"
             android:layout_width="match_parent"
-            android:layout_height="134dp"
-            app:srcCompat="@drawable/food_pic_1" />
+            android:layout_height="match_parent"
+             />
 
     </androidx.cardview.widget.CardView>
 
@@ -64,34 +64,60 @@
         android:layout_marginStart="56dp"
         android:text="1"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/restaurant_delivery_fee"
+        app:layout_constraintBottom_toBottomOf="@+id/restaurant_delivery_fee2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dish_description_extended"
+        app:layout_constraintTop_toTopOf="@+id/restaurant_delivery_fee2"
         app:layout_constraintVertical_bias="1.0" />
 
     <TextView
-        android:id="@+id/restaurant_delivery_fee"
+        android:id="@+id/item_price_extended"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
         android:layout_marginEnd="16dp"
-        android:text="EGP 15.00"
+        android:text="15.00"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dish_description_extended" />
 
+    <TextView
+        android:id="@+id/restaurant_delivery_fee2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="12dp"
+        android:text="@string/egp"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/item_price_extended"
+        app:layout_constraintEnd_toStartOf="@+id/item_price_extended"
+        app:layout_constraintTop_toTopOf="@+id/item_price_extended"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/restaurant_delivery_fee3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/egp"
+        android:elevation="100dp"
+        android:layout_marginRight="8dp"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/total_item_cost"
+        app:layout_constraintEnd_toStartOf="@+id/total_item_cost"
+        app:layout_constraintTop_toTopOf="@+id/total_item_cost"
+        app:layout_constraintVertical_bias="0.0" />
+
     <Button
         android:id="@+id/add_to_cart_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
         android:layout_marginHorizontal="8sp"
+        android:layout_marginTop="24dp"
+        android:backgroundTint="@color/purple_700"
         android:text="Add to Cart"
         android:textAlignment="viewEnd"
         app:layout_constraintEnd_toEndOf="parent"
-        android:backgroundTint="@color/purple_700"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/item_count_extended" />
 
@@ -99,9 +125,9 @@
         android:id="@+id/total_item_cost"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="48dp"
         android:elevation="100dp"
-        android:text="EGP 15.00"
+        android:text="15.00"
         android:textColor="@color/white"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/add_to_cart_button"
@@ -115,7 +141,7 @@
         android:layout_height="15sp"
         android:layout_marginLeft="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/item_count_extended"
-        app:layout_constraintEnd_toStartOf="@+id/restaurant_delivery_fee"
+        app:layout_constraintEnd_toStartOf="@+id/item_price_extended"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/item_count_extended"
         app:layout_constraintTop_toTopOf="@+id/item_count_extended"

@@ -58,7 +58,6 @@ public class RestaurantItemExpanded extends AppCompatActivity {
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         DishModel dish = snapshot.getValue(DishModel.class);
                         String available = dish.getAvailable();
-                        Log.d("Gaber1", available);
 
                         if(Objects.equals(available, "1")){
                             dish.itemCount=number_of_items.toString();
@@ -125,8 +124,6 @@ public class RestaurantItemExpanded extends AppCompatActivity {
                 }
                 binding.itemPriceExtended.setText(dish.getPrice());
                 binding.totalItemCost.setText(dish.getPrice());
-
-
             }
 
             @Override

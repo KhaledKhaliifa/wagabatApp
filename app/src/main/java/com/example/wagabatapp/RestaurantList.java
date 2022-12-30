@@ -2,11 +2,15 @@ package com.example.wagabatapp;
 
 import static android.content.ContentValues.TAG;
 
+import static com.example.wagabatapp.CartAdapter.context;
+
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -48,15 +52,13 @@ public class RestaurantList extends AppCompatActivity {
                 }
                 adapter.notifyDataSetChanged();
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
         });
-
-
         recyclerView.setAdapter(adapter);
-
     }
+
+
 }

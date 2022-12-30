@@ -10,7 +10,7 @@
     <string name="phone_number">Phone Number</string>
     <string name="register_address_field">Address</string>
     <string name="register_full_name">Full Name</string>
-    <string name="basket">Basket</string>
+    <string name="basket">Your Cart</string>
     <string name="special_request_string">Special request</string>
     <string name="add_a_note">Add a note</string>
     <string name="please_type_all_your_special_requests_here">Please type all your special requests here.</string>

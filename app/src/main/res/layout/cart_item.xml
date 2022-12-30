@@ -50,11 +50,35 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:text="EGP 30.00"
+        android:layout_marginStart="32dp"
+        android:text="30.00"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/item_count_cart"
+        app:layout_constraintStart_toStartOf="@+id/item_name_cart" />
+
+    <TextView
+        android:id="@+id/item_price_cart2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:text="@string/egp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/item_price_cart"
         app:layout_constraintStart_toStartOf="@+id/item_name_cart"
-        app:layout_constraintTop_toTopOf="@+id/minus_sign_cart" />
+        app:layout_constraintTop_toTopOf="@+id/item_price_cart" />
+
+    <TextView
+        android:id="@+id/item_price_cart3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginEnd="8dp"
+        android:text="Count"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/item_price_cart"
+        app:layout_constraintEnd_toStartOf="@+id/item_count_cart"
+        app:layout_constraintTop_toTopOf="@+id/item_count_cart"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/item_count_cart"
@@ -66,32 +90,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/cardView"
         app:layout_constraintStart_toEndOf="@+id/item_name_cart" />
-
-    <ImageView
-        android:id="@+id/plus_sign_cart"
-        android:layout_width="15sp"
-        android:layout_height="15sp"
-        android:layout_marginLeft="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/item_count_cart"
-        app:layout_constraintEnd_toStartOf="@+id/cardView"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/item_count_cart"
-        app:layout_constraintTop_toTopOf="@+id/item_count_cart"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/plus_sign" />
-
-    <ImageView
-        android:id="@+id/minus_sign_cart"
-        android:layout_width="15sp"
-        android:layout_height="15sp"
-        android:layout_marginRight="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/item_count_cart"
-        app:layout_constraintEnd_toStartOf="@+id/item_count_cart"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/item_price_cart"
-        app:layout_constraintTop_toTopOf="@+id/item_count_cart"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/minus_sign" />
 
     <TextView
         android:id="@+id/referenceHidden"

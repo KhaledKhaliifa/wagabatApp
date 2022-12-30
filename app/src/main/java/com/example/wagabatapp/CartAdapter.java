@@ -69,31 +69,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
             new DownloadImageTask( holder.image)
                     .execute(dish.getImageLink());
         }
-        holder.plus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Integer number_of_items =  Integer.valueOf(holder.item_count.getText().toString());
-                Float singleItemPrice = Float.valueOf(holder.item_price.getText().toString()) / number_of_items;
-                number_of_items+=1;
-                holder.item_count.setText(number_of_items.toString());
-                Float total_cost = number_of_items * singleItemPrice;
-                holder.item_price.setText(total_cost.toString());
-            }
-        });
-        holder.minus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Integer number_of_items =  Integer.valueOf(holder.item_count.getText().toString());
-                Float singleItemPrice = Float.valueOf(holder.item_price.getText().toString()) / number_of_items;
-
-                if(number_of_items!=1){
-                    number_of_items-=1;
-                    holder.item_count.setText(number_of_items.toString());
-                    Float total_cost = number_of_items * singleItemPrice;
-                    holder.item_price.setText(total_cost.toString());
-                }
-            }
-        });
     }
 
     @Override
@@ -104,7 +79,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView item_name, item_price, item_count, item_reference;
-        ImageView image, plus, minus;
+        ImageView image;
 //        SharedPreferences prefs;
 
         public ViewHolder(@NonNull View itemView) {
@@ -114,38 +89,13 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
             item_price = itemView.findViewById(R.id.item_price_cart);
             item_count = itemView.findViewById(R.id.item_count_cart);
             image = itemView.findViewById(R.id.item_picture);
-            plus = itemView.findViewById(R.id.plus_sign_cart);
-            minus = itemView.findViewById(R.id.minus_sign_cart);
+
             item_reference = itemView.findViewById(R.id.referenceHidden);
 
             //TODO: Maybe add onclick listener to RestaurantItemExpanded
 
         }
     }
-    public void updateFirebase(String reference, Integer number_of_items){
-        String restaurantPosition = String.valueOf(reference.charAt(0));
-        String dishPosition = String.valueOf(reference.charAt(1));
 
-        databaseReference = FirebaseDatabase.getInstance("https://wagbaapp-default-rtdb.europe-west1.firebasedatabase.app/")
-                .getReference("/cart/"+restaurantPosition+dishPosition);
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                DishModel dish = snapshot.getValue(DishModel.class);
-                dish.itemCount=number_of_items.toString();
-                dish.reference = restaurantPosition+dishPosition;
-                databaseReference.setValue(dish);
-
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-//                   dishName = "Missing Dish Name";
-//                   binding.dishNameExtended.setText(dishName);
-            }
-        });
-    }
-    public void updateTotal(){
-
-    }
 }
 

@@ -7,8 +7,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 
 import com.example.wagabatapp.databinding.ActivityCartPageBinding;
 import com.google.firebase.database.DataSnapshot;
@@ -47,9 +50,8 @@ public class CartPage extends AppCompatActivity {
         delivery_cost = Float.valueOf(0);
         subtotal_cost = Float.valueOf(0);
 
+
         databaseReference = FirebaseDatabase.getInstance("https://wagbaapp-default-rtdb.europe-west1.firebasedatabase.app/").getReference("cart");
-
-
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -60,16 +62,18 @@ public class CartPage extends AppCompatActivity {
                     subtotal_cost += Float.valueOf(dish.getPrice()) * Float.valueOf(dish.getItemCount());
                 }
                 restaurantReference = FirebaseDatabase.getInstance("https://wagbaapp-default-rtdb.europe-west1.firebasedatabase.app/")
-                        .getReference("restaurants/restaurant"+restaurantID+"/delivery_fee");
+                        .getReference("restaurants/restaurant"+restaurantID);
                 restaurantReference.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        delivery_cost=  Float.valueOf(snapshot.getValue().toString());
+                        RestaurantModel restaurant = snapshot.getValue(RestaurantModel.class);
+                        binding.deliveryTimeHidden.setText(restaurant.getDelivery_time());
+                        delivery_cost=  Float.valueOf(restaurant.getDelivery_fee());
                         binding.deliveryFeeAmount.setText(delivery_cost.toString());
                         binding.subtotalAmount.setText(subtotal_cost.toString());
                         total_cost = delivery_cost+subtotal_cost;
-                        binding.totalAmountCart.setText(total_cost.toString());
 
+                        binding.totalAmountCart.setText(total_cost.toString());
                     }
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
@@ -78,9 +82,34 @@ public class CartPage extends AppCompatActivity {
                 adapter.notifyDataSetChanged();
 
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        binding.checkoutBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                TextView c = findViewById(R.id.subtotalAmount);
+                subtotal_cost = Float.valueOf(c.getText().toString());
+                TextView x = findViewById(R.id.totalAmountCart);
+                total_cost = Float.valueOf(x.getText().toString());
+                TextView y = findViewById(R.id.deliveryFeeAmount);
+                delivery_cost = Float.valueOf(y.getText().toString());
+                TextView z = findViewById(R.id.deliveryTimeHidden);
+                String delivery_time = z.getText().toString();
+//                Log.d("Gaberrr", subtotal_cost.toString());
+//                Log.d("Gaberrr", total_cost.toString());
+//                Log.d("Gaberrr", delivery_cost.toString());
+//                Log.d("Gaberrr", delivery_time.toString());
+
+                Intent intent = new Intent(CartPage.this, CheckoutPage.class);
+                intent.putExtra("subtotal",subtotal_cost.toString());
+                intent.putExtra("total",total_cost.toString());
+                intent.putExtra("delivery",delivery_cost.toString());
+                intent.putExtra("time",delivery_time);
+                startActivity(intent);
+
 
             }
         });

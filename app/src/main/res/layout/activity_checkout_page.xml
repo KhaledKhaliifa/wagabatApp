@@ -8,6 +8,42 @@
 
 
     <TextView
+        android:id="@+id/totalAmountCart7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="@string/egp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/subtotalAmount2"
+        app:layout_constraintEnd_toStartOf="@+id/subtotalAmount2"
+        app:layout_constraintTop_toTopOf="@+id/subtotalAmount2"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/totalAmountCart5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="@string/egp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/total_amount_checkout"
+        app:layout_constraintEnd_toStartOf="@+id/total_amount_checkout"
+        app:layout_constraintTop_toTopOf="@+id/total_amount_checkout"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/totalAmountCart6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="@string/egp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/delivery_fee_checkout"
+        app:layout_constraintEnd_toStartOf="@+id/delivery_fee_checkout"
+        app:layout_constraintTop_toTopOf="@+id/delivery_fee_checkout"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
         android:id="@+id/restaurantName2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -46,7 +82,7 @@
             app:srcCompat="@drawable/delivery_outlined" />
 
         <TextView
-            android:id="@+id/textView13"
+            android:id="@+id/within_time_checkout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -67,7 +103,7 @@
         android:layout_marginEnd="12dp"
         android:layout_marginBottom="366dp"
         android:background="@drawable/item_border"
-        app:layout_constraintBottom_toTopOf="@+id/subtotalAmount"
+        app:layout_constraintBottom_toTopOf="@+id/delivery_fee_checkout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -176,7 +212,7 @@
         app:layout_constraintVertical_bias="0.898" />
 
     <TextView
-        android:id="@+id/subtotalAmount"
+        android:id="@+id/delivery_fee_checkout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="12dp"
@@ -187,26 +223,14 @@
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
     <TextView
-        android:id="@+id/deliveryFeeAmount"
+        android:id="@+id/total_amount_checkout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="12dp"
         android:text="EGP 0.00"
-        app:layout_constraintBottom_toTopOf="@+id/textView12"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/subtotalAmount"
-        app:layout_constraintVertical_bias="0.058" />
-
-    <TextView
-        android:id="@+id/textView12"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="12dp"
-        android:text="EGP 0.00"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView8" />
+        app:layout_constraintTop_toBottomOf="@+id/delivery_fee_checkout" />
 
     <Button
         android:id="@+id/place_order_button"

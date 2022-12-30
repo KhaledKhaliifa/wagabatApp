@@ -4,11 +4,18 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class CheckoutPage extends AppCompatActivity {
+import com.example.wagabatapp.databinding.ActivityCheckoutPageBinding;
 
+public class CheckoutPage extends AppCompatActivity {
+    ActivityCheckoutPageBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_checkout_page);
+        binding = ActivityCheckoutPageBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        binding.withinTimeCheckout.setText("Within "+getIntent().getStringExtra("time"));
+        binding.subtotalAmount2.setText(getIntent().getStringExtra("subtotal"));
+        binding.deliveryFeeCheckout.setText(getIntent().getStringExtra("delivery"));
+        binding.totalAmountCheckout.setText(getIntent().getStringExtra("total"));
     }
 }

@@ -110,10 +110,7 @@ public class RestaurantItemExpanded extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 DishModel dish = snapshot.getValue(DishModel.class);
-                if(dish.getImageLink()!= null){
-                    new DownloadImageTask( binding.restaurantImage)
-                            .execute(dish.getImageLink());
-                }
+
                 Log.d("Gaber", dish.getName());
                 binding.dishNameExtended.setText(dish.getName());
                 if(!Objects.equals(dish.getDescription(), "")){

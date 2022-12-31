@@ -14,6 +14,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -45,8 +46,6 @@ public class DishAdapter extends RecyclerView.Adapter<DishAdapter.ViewHolder>  {
         return new ViewHolder(view);
     }
 
-
-
     @Override
     public void onBindViewHolder(@NonNull DishAdapter.ViewHolder holder, int position) {
         DishModel dish = list.get(position);
@@ -62,12 +61,7 @@ public class DishAdapter extends RecyclerView.Adapter<DishAdapter.ViewHolder>  {
             holder.availability.setTextColor(Color.parseColor("#AA0000"));
 
         }
-        if(dish.getImageLink()!= null){
-            new DownloadImageTask( holder.image)
-                    .execute(dish.getImageLink());
-        }
-
-
+        Glide.with(context).load(dish.getImageLink()).into(holder.image);
     }
 
     @Override

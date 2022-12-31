@@ -1,7 +1,7 @@
 package com.example.wagabatapp;
 import static android.content.ContentValues.TAG;
 import static android.content.Context.MODE_PRIVATE;
-
+import com.bumptech.glide.Glide;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -21,6 +21,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.time.Instant;
 import java.util.ArrayList;
 
 public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.ViewHolder> {
@@ -56,11 +57,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
         holder.specialty.setText(restaurant.getSpecialty());
         holder.delivery_time.setText(restaurant.getDelivery_time());
         holder.delivery_fee.setText(restaurant.getDelivery_fee());
-        if(restaurant.getImageLink()!= null){
-            new DownloadImageTask( holder.image)
-                    .execute(restaurant.getImageLink());
-        }
-
+        Glide.with(context).load(restaurant.getImageLink()).into(holder.image);
     }
 
     @Override

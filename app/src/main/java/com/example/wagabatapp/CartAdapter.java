@@ -80,7 +80,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 
         TextView item_name, item_price, item_count, item_reference;
         ImageView image;
-//        SharedPreferences prefs;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

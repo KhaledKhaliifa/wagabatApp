@@ -50,43 +50,60 @@ public class CartPage extends AppCompatActivity {
         delivery_cost = Float.valueOf(0);
         subtotal_cost = Float.valueOf(0);
 
-
-        databaseReference = FirebaseDatabase.getInstance("https://wagbaapp-default-rtdb.europe-west1.firebasedatabase.app/").getReference("cart");
-        databaseReference.addValueEventListener(new ValueEventListener() {
+        databaseReference = FirebaseDatabase.getInstance("https://wagbaapp-default-rtdb.europe-west1.firebasedatabase.app/").getReference();
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot dataSnapshot: snapshot.getChildren()){
-                    DishModel dish = dataSnapshot.getValue(DishModel.class);
-                    restaurantID = String.valueOf(dish.getReference().charAt(0));
-                    list.add(dish);
-                    subtotal_cost += Float.valueOf(dish.getPrice()) * Float.valueOf(dish.getItemCount());
+                if(snapshot.hasChild("cart")){
+                    databaseReference = FirebaseDatabase.getInstance("https://wagbaapp-default-rtdb.europe-west1.firebasedatabase.app/").getReference("cart");
+                    databaseReference.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            for(DataSnapshot dataSnapshot: snapshot.getChildren()){
+                                DishModel dish = dataSnapshot.getValue(DishModel.class);
+                                restaurantID = String.valueOf(dish.getReference().charAt(0));
+                                list.add(dish);
+                                subtotal_cost += Float.valueOf(dish.getPrice()) * Float.valueOf(dish.getItemCount());
+                            }
+                            restaurantReference = FirebaseDatabase.getInstance("https://wagbaapp-default-rtdb.europe-west1.firebasedatabase.app/")
+                                    .getReference("restaurants/restaurant"+restaurantID);
+                            restaurantReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    RestaurantModel restaurant = snapshot.getValue(RestaurantModel.class);
+                                    binding.deliveryTimeHidden.setText(restaurant.getDelivery_time());
+                                    delivery_cost=  Float.valueOf(restaurant.getDelivery_fee());
+                                    binding.deliveryFeeAmount.setText(delivery_cost.toString());
+                                    binding.subtotalAmount.setText(subtotal_cost.toString());
+                                    total_cost = delivery_cost+subtotal_cost;
+
+                                    binding.totalAmountCart.setText(total_cost.toString());
+                                }
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+                                }
+                            });
+                            adapter.notifyDataSetChanged();
+
+                        }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
                 }
-                restaurantReference = FirebaseDatabase.getInstance("https://wagbaapp-default-rtdb.europe-west1.firebasedatabase.app/")
-                        .getReference("restaurants/restaurant"+restaurantID);
-                restaurantReference.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        RestaurantModel restaurant = snapshot.getValue(RestaurantModel.class);
-                        binding.deliveryTimeHidden.setText(restaurant.getDelivery_time());
-                        delivery_cost=  Float.valueOf(restaurant.getDelivery_fee());
-                        binding.deliveryFeeAmount.setText(delivery_cost.toString());
-                        binding.subtotalAmount.setText(subtotal_cost.toString());
-                        total_cost = delivery_cost+subtotal_cost;
+                else{
+                    binding.yourCartTextView.setText("Your cart is empty!");
 
-                        binding.totalAmountCart.setText(total_cost.toString());
-                    }
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-                    }
-                });
-                adapter.notifyDataSetChanged();
-
+                }
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
         });
+
         binding.checkoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -98,10 +115,6 @@ public class CartPage extends AppCompatActivity {
                 delivery_cost = Float.valueOf(y.getText().toString());
                 TextView z = findViewById(R.id.deliveryTimeHidden);
                 String delivery_time = z.getText().toString();
-//                Log.d("Gaberrr", subtotal_cost.toString());
-//                Log.d("Gaberrr", total_cost.toString());
-//                Log.d("Gaberrr", delivery_cost.toString());
-//                Log.d("Gaberrr", delivery_time.toString());
 
                 Intent intent = new Intent(CartPage.this, CheckoutPage.class);
                 intent.putExtra("subtotal",subtotal_cost.toString());
@@ -109,8 +122,6 @@ public class CartPage extends AppCompatActivity {
                 intent.putExtra("delivery",delivery_cost.toString());
                 intent.putExtra("time",delivery_time);
                 startActivity(intent);
-
-
             }
         });
 

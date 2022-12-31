@@ -15,7 +15,6 @@
         android:text="Your Profile"
         android:textSize="22sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/dishes_rv"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -24,12 +23,23 @@
         android:id="@+id/profile_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="168dp"
+        android:layout_marginBottom="5dp"
+        android:text="Name"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.611"
+        app:layout_constraintStart_toEndOf="@+id/profile_name2"
+        app:layout_constraintTop_toTopOf="@+id/profile_name2" />
+
+    <TextView
+        android:id="@+id/profile_name2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="160dp"
         android:layout_marginBottom="5dp"
         android:text="Name"
         android:textSize="22sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/dishes_rv"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.186"
         app:layout_constraintStart_toStartOf="parent"
@@ -39,45 +49,83 @@
         android:id="@+id/profile_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="5dp"
+        android:text="Email"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="@+id/profile_name"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/profile_email2"
+        app:layout_constraintTop_toTopOf="@+id/profile_email2" />
+
+    <TextView
+        android:id="@+id/profile_email2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
         android:text="Email"
         android:textSize="22sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/dishes_rv"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.184"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/profile_name2"
         app:layout_constraintTop_toBottomOf="@+id/profile_name" />
 
     <TextView
         android:id="@+id/profile_number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="5dp"
+        android:text="Number"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="@+id/profile_email"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/profile_number2"
+        app:layout_constraintTop_toTopOf="@+id/profile_number2" />
+
+    <TextView
+        android:id="@+id/profile_number2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
         android:text="Number"
         android:textSize="22sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/dishes_rv"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.198"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/profile_email2"
         app:layout_constraintTop_toBottomOf="@+id/profile_email" />
 
     <TextView
         android:id="@+id/profile_address"
+        android:layout_width="150sp"
+        android:layout_height="wrap_content"
+        android:text="Address"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="@+id/profile_number"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/profile_address2"
+        app:layout_constraintTop_toTopOf="@+id/profile_address2" />
+
+    <TextView
+        android:id="@+id/profile_address2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="5dp"
+        android:layout_marginTop="24dp"
         android:text="Address"
         android:textSize="22sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/dishes_rv"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.198"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.003"
+        app:layout_constraintStart_toStartOf="@+id/profile_number2"
         app:layout_constraintTop_toBottomOf="@+id/profile_number" />
+
+    <Button
+        android:id="@+id/logout_btn"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="@string/log_out"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

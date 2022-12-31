@@ -1,4 +1,4 @@
-package com.example.wagabatapp;
+package com.example.wagabatapp.Models;
 import com.google.firebase.database.IgnoreExtraProperties;
 
 @IgnoreExtraProperties

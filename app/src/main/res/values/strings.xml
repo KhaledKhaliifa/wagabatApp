@@ -38,4 +38,5 @@
     <string name="type_your_email">Type your email</string>
     <string name="egp">EGP</string>
     <string name="missingDescriptionString">Missing Description!</string>
+    <string name="log_out">Log out</string>
 </resources>

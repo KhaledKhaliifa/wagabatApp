@@ -1,10 +1,9 @@
 package com.example.wagabatapp;
 
-import static android.content.ContentValues.TAG;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -12,8 +11,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.example.wagabatapp.Models.DishModel;
 import com.example.wagabatapp.databinding.ActivityRestaurantItemExpandedBinding;
-import com.example.wagabatapp.databinding.ActivityRestaurantMenuBinding;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -29,10 +29,13 @@ public class RestaurantItemExpanded extends AppCompatActivity {
     String dishName;
     DatabaseReference databaseReference;
     DatabaseReference dishReference;
+    static Context context;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        context = getBaseContext();
 
         setContentView(R.layout.activity_restaurant_item_expanded);
 
@@ -63,6 +66,8 @@ public class RestaurantItemExpanded extends AppCompatActivity {
                             dish.itemCount=number_of_items.toString();
                             dish.reference = restaurantPosition+dishPosition;
                             databaseReference.setValue(dish);
+                            Toast.makeText(RestaurantItemExpanded.this, "Added to cart!", Toast.LENGTH_LONG).show();
+
                         }
                         else{
                             Toast.makeText(RestaurantItemExpanded.this, "This item isn't available", Toast.LENGTH_LONG).show();
@@ -110,6 +115,8 @@ public class RestaurantItemExpanded extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 DishModel dish = snapshot.getValue(DishModel.class);
+                Glide.with(context).load(dish.getImageLink()).into(binding.restaurantImage);
+
 
                 Log.d("Gaber", dish.getName());
                 binding.dishNameExtended.setText(dish.getName());

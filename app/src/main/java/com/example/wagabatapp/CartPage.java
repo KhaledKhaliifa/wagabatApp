@@ -1,7 +1,5 @@
 package com.example.wagabatapp;
 
-import static android.content.ContentValues.TAG;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -9,10 +7,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.wagabatapp.Adapters.CartAdapter;
+import com.example.wagabatapp.Models.DishModel;
+import com.example.wagabatapp.Models.RestaurantModel;
 import com.example.wagabatapp.databinding.ActivityCartPageBinding;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;

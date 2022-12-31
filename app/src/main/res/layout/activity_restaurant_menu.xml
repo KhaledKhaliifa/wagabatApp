@@ -39,7 +39,7 @@
         android:layout_height="30dp"
         app:layout_constraintBottom_toBottomOf="@+id/restaurant_name_in_dishes"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.818"
+        app:layout_constraintHorizontal_bias="0.613"
         app:layout_constraintStart_toEndOf="@+id/restaurant_name_in_dishes"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"

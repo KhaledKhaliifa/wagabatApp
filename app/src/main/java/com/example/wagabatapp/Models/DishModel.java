@@ -1,4 +1,4 @@
-package com.example.wagabatapp;
+package com.example.wagabatapp.Models;
 
 import com.google.firebase.database.IgnoreExtraProperties;
 
@@ -9,8 +9,8 @@ public class DishModel {
     String available;
     String description;
     String imageLink;
-    String itemCount;
-    String reference;
+    public String itemCount;
+    public String reference;
 
     public DishModel(){
 

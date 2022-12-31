@@ -1,34 +1,21 @@
-package com.example.wagabatapp;
-import static android.content.ContentValues.TAG;
-import static android.content.Context.MODE_PRIVATE;
+package com.example.wagabatapp.Adapters;
 
 import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.wagabatapp.databinding.ActivityRestaurantItemExpandedBinding;
-import com.example.wagabatapp.databinding.CartItemBinding;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
+import com.bumptech.glide.Glide;
+import com.example.wagabatapp.Models.DishModel;
+import com.example.wagabatapp.R;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
     ArrayList<DishModel> list;
@@ -65,10 +52,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         item_price = item_price * count;
         holder.item_price.setText(item_price.toString());
 
-        if(dish.getImageLink()!= null){
-            new DownloadImageTask( holder.image)
-                    .execute(dish.getImageLink());
-        }
+        Glide.with(context).load(dish.getImageLink()).into(holder.image);
+
     }
 
     @Override

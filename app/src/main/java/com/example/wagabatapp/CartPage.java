@@ -57,9 +57,11 @@ public class CartPage extends AppCompatActivity {
                 if(snapshot.hasChild("cart")){
                     databaseReference = FirebaseDatabase.getInstance("https://wagbaapp-default-rtdb.europe-west1.firebasedatabase.app/").getReference("cart");
                     databaseReference.addValueEventListener(new ValueEventListener() {
+
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             for(DataSnapshot dataSnapshot: snapshot.getChildren()){
+
                                 DishModel dish = dataSnapshot.getValue(DishModel.class);
                                 restaurantID = String.valueOf(dish.getReference().charAt(0));
                                 list.add(dish);
@@ -68,6 +70,7 @@ public class CartPage extends AppCompatActivity {
                             restaurantReference = FirebaseDatabase.getInstance("https://wagbaapp-default-rtdb.europe-west1.firebasedatabase.app/")
                                     .getReference("restaurants/restaurant"+restaurantID);
                             restaurantReference.addListenerForSingleValueEvent(new ValueEventListener() {
+
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                                     RestaurantModel restaurant = snapshot.getValue(RestaurantModel.class);
@@ -105,6 +108,7 @@ public class CartPage extends AppCompatActivity {
         });
 
         binding.checkoutBtn.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
                 TextView c = findViewById(R.id.subtotalAmount);

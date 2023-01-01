@@ -23,38 +23,38 @@
         android:id="@+id/profile_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
+        android:layout_marginTop="8dp"
         android:text="Name"
         android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.611"
+        app:layout_constraintHorizontal_bias="0.614"
         app:layout_constraintStart_toEndOf="@+id/profile_name2"
-        app:layout_constraintTop_toTopOf="@+id/profile_name2" />
+        app:layout_constraintTop_toBottomOf="@+id/profile_name2" />
 
     <TextView
         android:id="@+id/profile_name2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="160dp"
-        android:layout_marginBottom="5dp"
+        android:layout_marginTop="36dp"
         android:text="Name"
         android:textSize="22sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.186"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/profile_header" />
 
     <TextView
         android:id="@+id/profile_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:text="Email"
         android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="@+id/profile_name"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/profile_email2"
-        app:layout_constraintTop_toTopOf="@+id/profile_email2" />
+        app:layout_constraintTop_toBottomOf="@+id/profile_email2" />
 
     <TextView
         android:id="@+id/profile_email2"
@@ -73,12 +73,13 @@
         android:id="@+id/profile_number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:text="Number"
         android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="@+id/profile_email"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/profile_number2"
-        app:layout_constraintTop_toTopOf="@+id/profile_number2" />
+        app:layout_constraintTop_toBottomOf="@+id/profile_number2" />
 
     <TextView
         android:id="@+id/profile_number2"
@@ -95,14 +96,16 @@
 
     <TextView
         android:id="@+id/profile_address"
-        android:layout_width="150sp"
+        android:layout_width="260sp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:text="Address"
+        android:textAlignment="textEnd"
         android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="@+id/profile_number"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/profile_address2"
-        app:layout_constraintTop_toTopOf="@+id/profile_address2" />
+        app:layout_constraintTop_toBottomOf="@+id/profile_address2" />
 
     <TextView
         android:id="@+id/profile_address2"

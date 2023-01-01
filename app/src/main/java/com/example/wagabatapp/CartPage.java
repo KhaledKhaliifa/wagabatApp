@@ -6,14 +6,20 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import com.example.wagabatapp.Adapters.CartAdapter;
 import com.example.wagabatapp.Models.DishModel;
 import com.example.wagabatapp.Models.RestaurantModel;
+import com.example.wagabatapp.Room.User;
+import com.example.wagabatapp.Room.UserDao;
+import com.example.wagabatapp.Room.UserRoomDatabase;
 import com.example.wagabatapp.databinding.ActivityCartPageBinding;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -34,6 +40,7 @@ public class CartPage extends AppCompatActivity {
     Float delivery_cost;
     Float subtotal_cost;
     String restaurantID;
+    String uid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,63 +56,75 @@ public class CartPage extends AppCompatActivity {
         total_cost = Float.valueOf(0);
         delivery_cost = Float.valueOf(0);
         subtotal_cost = Float.valueOf(0);
+        UserRoomDatabase userDatabase = UserRoomDatabase.getDatabase(getApplicationContext());
+        UserDao userDao = userDatabase.userDao();
 
-        databaseReference = FirebaseDatabase.getInstance("https://wagbaapp-default-rtdb.europe-west1.firebasedatabase.app/").getReference();
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+        new Thread(new Runnable() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.hasChild("cart")){
-                    databaseReference = FirebaseDatabase.getInstance("https://wagbaapp-default-rtdb.europe-west1.firebasedatabase.app/").getReference("cart");
-                    databaseReference.addValueEventListener(new ValueEventListener() {
-
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            for(DataSnapshot dataSnapshot: snapshot.getChildren()){
-
-                                DishModel dish = dataSnapshot.getValue(DishModel.class);
-                                restaurantID = String.valueOf(dish.getReference().charAt(0));
-                                list.add(dish);
-                                subtotal_cost += Float.valueOf(dish.getPrice()) * Float.valueOf(dish.getItemCount());
-                            }
-                            restaurantReference = FirebaseDatabase.getInstance("https://wagbaapp-default-rtdb.europe-west1.firebasedatabase.app/")
-                                    .getReference("restaurants/restaurant"+restaurantID);
-                            restaurantReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            public void run() {
+                uid = FirebaseAuth.getInstance().getUid();
+                Log.d("Gaberr", uid.toString());
+                databaseReference = FirebaseDatabase.getInstance("https://wagbaapp-default-rtdb.europe-west1.firebasedatabase.app/")
+                        .getReference("users/"+uid);
+                databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if(snapshot.hasChild("cart")){
+                            databaseReference = FirebaseDatabase.getInstance("https://wagbaapp-default-rtdb.europe-west1.firebasedatabase.app/")
+                                    .getReference("users/"+uid+"/cart");
+                            databaseReference.addValueEventListener(new ValueEventListener() {
 
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                    RestaurantModel restaurant = snapshot.getValue(RestaurantModel.class);
-                                    binding.deliveryTimeHidden.setText(restaurant.getDelivery_time());
-                                    delivery_cost=  Float.valueOf(restaurant.getDelivery_fee());
-                                    binding.deliveryFeeAmount.setText(delivery_cost.toString());
-                                    binding.subtotalAmount.setText(subtotal_cost.toString());
-                                    total_cost = delivery_cost+subtotal_cost;
+                                    for(DataSnapshot dataSnapshot: snapshot.getChildren()){
 
-                                    binding.totalAmountCart.setText(total_cost.toString());
+                                        DishModel dish = dataSnapshot.getValue(DishModel.class);
+                                        restaurantID = String.valueOf(dish.getReference().charAt(0));
+                                        list.add(dish);
+                                        subtotal_cost += Float.valueOf(dish.getPrice()) * Float.valueOf(dish.getItemCount());
+                                    }
+                                    restaurantReference = FirebaseDatabase.getInstance("https://wagbaapp-default-rtdb.europe-west1.firebasedatabase.app/")
+                                            .getReference("restaurants/restaurant"+restaurantID);
+                                    restaurantReference.addListenerForSingleValueEvent(new ValueEventListener() {
+
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            RestaurantModel restaurant = snapshot.getValue(RestaurantModel.class);
+                                            binding.deliveryTimeHidden.setText(restaurant.getDelivery_time());
+                                            delivery_cost=  Float.valueOf(restaurant.getDelivery_fee());
+                                            binding.deliveryFeeAmount.setText(delivery_cost.toString());
+                                            binding.subtotalAmount.setText(subtotal_cost.toString());
+                                            total_cost = delivery_cost+subtotal_cost;
+
+                                            binding.totalAmountCart.setText(total_cost.toString());
+                                        }
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+                                        }
+                                    });
+                                    adapter.notifyDataSetChanged();
+
                                 }
                                 @Override
                                 public void onCancelled(@NonNull DatabaseError error) {
+
                                 }
                             });
-                            adapter.notifyDataSetChanged();
+                        }
+                        else{
+                            binding.yourCartTextView.setText("Your cart is empty!");
 
                         }
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
+                    }
 
-                        }
-                    });
-                }
-                else{
-                    binding.yourCartTextView.setText("Your cart is empty!");
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
 
-                }
+                    }
+                });
             }
+        }).start();
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
 
         binding.checkoutBtn.setOnClickListener(new View.OnClickListener() {
 

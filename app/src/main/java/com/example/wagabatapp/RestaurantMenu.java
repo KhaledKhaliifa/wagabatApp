@@ -18,7 +18,11 @@ import android.widget.Toast;
 
 import com.example.wagabatapp.Adapters.DishAdapter;
 import com.example.wagabatapp.Models.DishModel;
+import com.example.wagabatapp.Room.User;
+import com.example.wagabatapp.Room.UserDao;
+import com.example.wagabatapp.Room.UserRoomDatabase;
 import com.example.wagabatapp.databinding.ActivityRestaurantMenuBinding;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -38,6 +42,7 @@ public class RestaurantMenu extends AppCompatActivity {
 
     LinearLayoutManager layoutManager;
     DishAdapter adapter;
+    FirebaseAuth mAuth;
 
 
     @Override
@@ -83,7 +88,6 @@ public class RestaurantMenu extends AppCompatActivity {
 
         });
         recyclerView.setAdapter(adapter);
-
     }
 
     public void applyRestaurantName(){
@@ -108,48 +112,55 @@ public class RestaurantMenu extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         Context context = this;
-        databaseReference = FirebaseDatabase.getInstance("https://wagbaapp-default-rtdb.europe-west1.firebasedatabase.app/").getReference();
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+        UserRoomDatabase userDatabase = UserRoomDatabase.getDatabase(getApplicationContext());
+        UserDao userDao = userDatabase.userDao();
+        SharedPreferences sh = getSharedPreferences("UserDetails", MODE_PRIVATE);
+        String email = sh.getString("email","");
+        mAuth = FirebaseAuth.getInstance();
+
+        new Thread(new Runnable() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.hasChild("cart")){
-                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            public void run() {
+                databaseReference = FirebaseDatabase.getInstance("https://wagbaapp-default-rtdb.europe-west1.firebasedatabase.app/").getReference("users/"+mAuth.getUid());
+                databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if(snapshot.hasChild("cart")){
+                            AlertDialog.Builder builder = new AlertDialog.Builder(context);
 
-                    builder.setCancelable(false)
-                            .setMessage("Are you sure? Going back clears your cart")
-                            .setPositiveButton("Yes", new DialogInterface.OnClickListener(){
+                            builder.setCancelable(false)
+                                    .setMessage("Are you sure? Going back clears your cart")
+                                    .setPositiveButton("Yes", new DialogInterface.OnClickListener(){
 
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-                                    Toast.makeText(RestaurantMenu.this,"Cart Cleared", Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(RestaurantMenu.this, RestaurantList.class);
-                                    clearCart();
-                                    finish();
-                                    startActivity(intent);
-                                }
-                            })
-                            .setNegativeButton("No", new DialogInterface.OnClickListener(){
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            Toast.makeText(RestaurantMenu.this,"Cart Cleared", Toast.LENGTH_SHORT).show();
+                                            clearCart(mAuth.getUid());
+                                            RestaurantMenu.super.onBackPressed();
+                                        }
+                                    })
+                                    .setNegativeButton("No", new DialogInterface.OnClickListener(){
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
 
-                                }
-                            }).show();
-                }
-                else{
-                    RestaurantMenu.super.onBackPressed();
-                }
+                                        }
+                                    }).show();
+                        }
+                        else{
+                            RestaurantMenu.super.onBackPressed();
+                        }
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
             }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
+        }).start();
     }
-    public void clearCart(){
+    public void clearCart(String uid){
         databaseReference = FirebaseDatabase.getInstance("https://wagbaapp-default-rtdb.europe-west1.firebasedatabase.app/")
-                .getReference();
+                .getReference("users/"+mAuth.getUid());
         databaseReference.child("cart").removeValue();
     }
 }

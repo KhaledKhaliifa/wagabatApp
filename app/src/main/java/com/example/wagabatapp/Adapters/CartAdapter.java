@@ -35,7 +35,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         LayoutInflater inflater = LayoutInflater.from(context);
         view = inflater.inflate(R.layout.cart_item, parent,false);
 
-
         return new ViewHolder(view);
     }
 

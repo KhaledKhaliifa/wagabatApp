@@ -13,6 +13,7 @@ import com.example.wagabatapp.Adapters.RestaurantAdapter;
 import com.example.wagabatapp.Models.RestaurantModel;
 import com.example.wagabatapp.databinding.ActivityRestaurantListBinding;
 import com.example.wagabatapp.databinding.ActivityRestaurantMenuBinding;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -27,6 +28,7 @@ public class RestaurantList extends AppCompatActivity {
     LinearLayoutManager layoutManager;
     DatabaseReference databaseReference;
     RestaurantAdapter adapter;
+    FirebaseAuth mAuth;
 
     ActivityRestaurantListBinding binding;
 
@@ -37,7 +39,6 @@ public class RestaurantList extends AppCompatActivity {
         binding = ActivityRestaurantListBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         recyclerView = findViewById(R.id.restaurant_list_rv);
-
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         list = new ArrayList<>();
@@ -52,7 +53,7 @@ public class RestaurantList extends AppCompatActivity {
         });
 
         databaseReference = FirebaseDatabase.getInstance("https://wagbaapp-default-rtdb.europe-west1.firebasedatabase.app/").getReference("restaurants");
-        databaseReference.addValueEventListener(new ValueEventListener() {
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot dataSnapshot: snapshot.getChildren()){
@@ -69,5 +70,8 @@ public class RestaurantList extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
     }
 
-
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
 }

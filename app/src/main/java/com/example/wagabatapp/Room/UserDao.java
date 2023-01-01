@@ -15,9 +15,10 @@ public interface UserDao {
     @Query("DELETE FROM user_table")
     void deleteAll();
 
-    @Query("SELECT * FROM user_table ORDER BY user ASC")
+    @Query("SELECT * FROM user_table ORDER BY name ASC")
     LiveData<List<User>> getAllUsers();
 
-    @Query("SELECT user FROM user_table WHERE user == :x")
-    LiveData<User> getUser(String x);
+    @Query("Select * From user_table where uid=(:uid)")
+    User getUser(String uid);
+
 }

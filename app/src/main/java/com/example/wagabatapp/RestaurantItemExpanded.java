@@ -13,7 +13,11 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.wagabatapp.Models.DishModel;
+import com.example.wagabatapp.Room.User;
+import com.example.wagabatapp.Room.UserDao;
+import com.example.wagabatapp.Room.UserRoomDatabase;
 import com.example.wagabatapp.databinding.ActivityRestaurantItemExpandedBinding;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -30,8 +34,7 @@ public class RestaurantItemExpanded extends AppCompatActivity {
     DatabaseReference databaseReference;
     DatabaseReference dishReference;
     static Context context;
-
-
+    String uid;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +47,17 @@ public class RestaurantItemExpanded extends AppCompatActivity {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         restaurantPosition = prefs.getString("restaurant","0");
         dishPosition = prefs.getString("dish","0");
+        uid = FirebaseAuth.getInstance().getUid();
+
+        UserRoomDatabase userDatabase = UserRoomDatabase.getDatabase(getApplicationContext());
+        UserDao userDao = userDatabase.userDao();
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                User user = userDao.getUser(uid);
+            }
+        }).start();
 
         applyDishName();
         binding.addToCartButton.setOnClickListener(new View.OnClickListener() {
@@ -52,7 +66,7 @@ public class RestaurantItemExpanded extends AppCompatActivity {
                 dishReference = FirebaseDatabase.getInstance("https://wagbaapp-default-rtdb.europe-west1.firebasedatabase.app/")
                         .getReference("restaurants/restaurant"+restaurantPosition+"/dishes/dish"+dishPosition);
                 databaseReference = FirebaseDatabase.getInstance("https://wagbaapp-default-rtdb.europe-west1.firebasedatabase.app/")
-                        .getReference("/cart/"+restaurantPosition+dishPosition);
+                        .getReference("users/"+uid.toString()+"/cart/"+restaurantPosition+dishPosition);
                 Float itemPrice = Float.valueOf(binding.itemPriceExtended.getText().toString());
                 Integer number_of_items =  Integer.valueOf(binding.itemCountExtended.getText().toString());
 
@@ -117,7 +131,6 @@ public class RestaurantItemExpanded extends AppCompatActivity {
                 DishModel dish = snapshot.getValue(DishModel.class);
                 Glide.with(context).load(dish.getImageLink()).into(binding.restaurantImage);
 
-
                 Log.d("Gaber", dish.getName());
                 binding.dishNameExtended.setText(dish.getName());
                 if(!Objects.equals(dish.getDescription(), "")){
@@ -136,7 +149,5 @@ public class RestaurantItemExpanded extends AppCompatActivity {
                 binding.dishNameExtended.setText(dishName);
             }
         });
-
-
     }
 }

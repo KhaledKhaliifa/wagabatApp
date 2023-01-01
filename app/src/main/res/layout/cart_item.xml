@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginHorizontal="10dp"
+    android:layout_marginHorizontal="5dp"
     android:layout_marginTop="18dp"
     android:paddingBottom="10dp">
 
@@ -13,7 +13,7 @@
         android:layout_width="75sp"
         android:layout_height="75sp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="17dp"
+        android:layout_marginEnd="50dp"
         android:layout_marginBottom="8dp"
         app:cardCornerRadius="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -22,10 +22,9 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
             android:id="@+id/item_picture"
-            >
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
         </ImageView>
 
@@ -68,19 +67,6 @@
         app:layout_constraintTop_toTopOf="@+id/item_price_cart" />
 
     <TextView
-        android:id="@+id/item_price_cart3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:layout_marginEnd="8dp"
-        android:text="Count"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/item_price_cart"
-        app:layout_constraintEnd_toStartOf="@+id/item_count_cart"
-        app:layout_constraintTop_toTopOf="@+id/item_count_cart"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
         android:id="@+id/item_count_cart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -95,10 +81,42 @@
         android:id="@+id/referenceHidden"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="invisible"
         android:text="reference"
+        android:visibility="invisible"
         tools:layout_editor_absoluteX="140dp"
         tools:layout_editor_absoluteY="8dp" />
+
+    <ImageView
+        android:id="@+id/plus_sign"
+        android:layout_width="12dp"
+        android:layout_height="13dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView8"
+        app:layout_constraintEnd_toStartOf="@+id/cardView"
+        app:layout_constraintHorizontal_bias="0.209"
+        app:layout_constraintStart_toEndOf="@+id/item_count_cart"
+        app:layout_constraintTop_toTopOf="@+id/minus_sign"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/plus_sign" />
+
+    <ImageView
+        android:id="@+id/minus_sign"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_marginEnd="12dp"
+        app:layout_constraintBottom_toBottomOf="@+id/item_count_cart"
+        app:layout_constraintEnd_toStartOf="@+id/item_count_cart"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/item_price_cart"
+        app:layout_constraintTop_toTopOf="@+id/item_count_cart"
+        app:srcCompat="@drawable/minus_sign" />
+
+    <ImageView
+        android:id="@+id/x_icon_cart"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/xicon" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

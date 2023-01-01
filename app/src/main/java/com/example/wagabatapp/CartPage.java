@@ -76,28 +76,44 @@ public class CartPage extends AppCompatActivity {
 
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                    for(DataSnapshot dataSnapshot: snapshot.getChildren()){
+                                    if (list != null) {
+                                        list.removeAll(list);
+                                        Log.d("Gaberrr", "List not null");
+                                        subtotal_cost = Float.valueOf(0);
+                                        delivery_cost = Float.valueOf(0);
+                                    }
 
-                                        DishModel dish = dataSnapshot.getValue(DishModel.class);
+                                    DishModel dish = new DishModel();
+                                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                                        dish = dataSnapshot.getValue(DishModel.class);
                                         restaurantID = String.valueOf(dish.getReference().charAt(0));
                                         list.add(dish);
                                         subtotal_cost += Float.valueOf(dish.getPrice()) * Float.valueOf(dish.getItemCount());
                                     }
+
                                     restaurantReference = FirebaseDatabase.getInstance("https://wagbaapp-default-rtdb.europe-west1.firebasedatabase.app/")
-                                            .getReference("restaurants/restaurant"+restaurantID);
+                                            .getReference("restaurants/restaurant" + restaurantID);
                                     restaurantReference.addListenerForSingleValueEvent(new ValueEventListener() {
 
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                                             RestaurantModel restaurant = snapshot.getValue(RestaurantModel.class);
+
                                             binding.deliveryTimeHidden.setText(restaurant.getDelivery_time());
-                                            delivery_cost=  Float.valueOf(restaurant.getDelivery_fee());
-                                            binding.deliveryFeeAmount.setText(delivery_cost.toString());
+                                            delivery_cost = Float.valueOf(restaurant.getDelivery_fee());
+                                            if(subtotal_cost == 0.0){
+                                                delivery_cost = Float.valueOf(0);
+                                                binding.yourCartTextView.setText("Your cart is empty!");
+
+                                            }
                                             binding.subtotalAmount.setText(subtotal_cost.toString());
-                                            total_cost = delivery_cost+subtotal_cost;
+                                            binding.deliveryFeeAmount.setText(delivery_cost.toString());
+
+                                            total_cost = delivery_cost + subtotal_cost;
 
                                             binding.totalAmountCart.setText(total_cost.toString());
                                         }
+
                                         @Override
                                         public void onCancelled(@NonNull DatabaseError error) {
                                         }

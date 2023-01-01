@@ -104,22 +104,17 @@ public class CartPage extends AppCompatActivity {
                                             if(subtotal_cost == 0.0){
                                                 delivery_cost = Float.valueOf(0);
                                                 binding.yourCartTextView.setText("Your cart is empty!");
-
                                             }
                                             binding.subtotalAmount.setText(subtotal_cost.toString());
                                             binding.deliveryFeeAmount.setText(delivery_cost.toString());
-
                                             total_cost = delivery_cost + subtotal_cost;
-
                                             binding.totalAmountCart.setText(total_cost.toString());
                                         }
-
                                         @Override
                                         public void onCancelled(@NonNull DatabaseError error) {
                                         }
                                     });
                                     adapter.notifyDataSetChanged();
-
                                 }
                                 @Override
                                 public void onCancelled(@NonNull DatabaseError error) {
@@ -129,7 +124,6 @@ public class CartPage extends AppCompatActivity {
                         }
                         else{
                             binding.yourCartTextView.setText("Your cart is empty!");
-
                         }
                     }
 
@@ -140,8 +134,6 @@ public class CartPage extends AppCompatActivity {
                 });
             }
         }).start();
-
-
         binding.checkoutBtn.setOnClickListener(new View.OnClickListener() {
 
             @Override

@@ -135,7 +135,7 @@ public class RestaurantMenu extends AppCompatActivity {
                                         @Override
                                         public void onClick(DialogInterface dialogInterface, int i) {
                                             Toast.makeText(RestaurantMenu.this,"Cart Cleared", Toast.LENGTH_SHORT).show();
-                                            clearCart(mAuth.getUid());
+                                            clearCart();
                                             RestaurantMenu.super.onBackPressed();
                                         }
                                     })
@@ -158,7 +158,7 @@ public class RestaurantMenu extends AppCompatActivity {
             }
         }).start();
     }
-    public void clearCart(String uid){
+    public void clearCart(){
         databaseReference = FirebaseDatabase.getInstance("https://wagbaapp-default-rtdb.europe-west1.firebasedatabase.app/")
                 .getReference("users/"+mAuth.getUid());
         databaseReference.child("cart").removeValue();

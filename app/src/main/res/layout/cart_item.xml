@@ -35,12 +35,10 @@
         android:id="@+id/item_name_cart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="26dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="116dp"
         android:text="Caesar Salad"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/item_count_cart"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -90,7 +88,6 @@
         android:id="@+id/plus_sign"
         android:layout_width="12dp"
         android:layout_height="13dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView8"
         app:layout_constraintEnd_toStartOf="@+id/cardView"
         app:layout_constraintHorizontal_bias="0.209"
         app:layout_constraintStart_toEndOf="@+id/item_count_cart"
@@ -114,8 +111,13 @@
         android:id="@+id/x_icon_cart"
         android:layout_width="20dp"
         android:layout_height="20dp"
+        android:elevation="100dp"
+        app:layout_constraintBottom_toBottomOf="@+id/cardView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHorizontal_bias="0.571"
+        app:layout_constraintStart_toEndOf="@+id/cardView"
+        app:layout_constraintTop_toTopOf="@+id/cardView"
+        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/xicon" />
 
 

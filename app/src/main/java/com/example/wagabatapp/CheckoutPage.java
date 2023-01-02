@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Database;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -28,7 +29,12 @@ public class CheckoutPage extends AppCompatActivity {
     ActivityCheckoutPageBinding binding;
     DatabaseReference databaseReference;
     DatabaseReference orderHistoryReference;
+    DatabaseReference restaurantReference;
     FirebaseAuth mAuth;
+    String restaurant_name;
+    String gateNum;
+    static Integer counter;
+    OrderModel order;
     List<DishModel> dish_list;
 
     @Override
@@ -50,7 +56,6 @@ public class CheckoutPage extends AppCompatActivity {
         binding.totalAmountCheckout.setText(total_amount);
 
         binding.placeOrderButton.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View view) {
                 if(binding.radioGroup.getCheckedRadioButtonId()==-1){
@@ -59,38 +64,84 @@ public class CheckoutPage extends AppCompatActivity {
                 else if(binding.radioButton1.isChecked()){
                     Toast.makeText(CheckoutPage.this, "Payment by credit card is unavailable", Toast.LENGTH_SHORT).show();
                 }
+                else if(binding.radioGroup2.getCheckedRadioButtonId()==-1){
+                    Toast.makeText(CheckoutPage.this, "You must select a gate!", Toast.LENGTH_SHORT).show();
+                }
                 else{
+                    if(binding.radioButtonGate3.isChecked()){
+                        gateNum = "Gate 3";
+                    }
+                    else{
+                        gateNum = "Gate 4";
+                    }
                     Long time = System.currentTimeMillis();
+                    Date d=new Date();
+                    counter = 0;
                     databaseReference = FirebaseDatabase.getInstance("https://wagbaapp-default-rtdb.europe-west1.firebasedatabase.app/")
                             .getReference("users/"+uid+"/cart");
                     orderHistoryReference = FirebaseDatabase.getInstance("https://wagbaapp-default-rtdb.europe-west1.firebasedatabase.app/")
-                            .getReference("users/"+uid+"/orders/"+time);
-                    databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                            .getReference("users/"+uid+"/orders/");
+                    orderHistoryReference.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            for(DataSnapshot dataSnapshot: snapshot.getChildren()){
-                                DishModel dish = dataSnapshot.getValue(DishModel.class);
-                                dish_list.add(dish);
+                            while (snapshot.hasChild(counter.toString())) {
+                                counter++;
                             }
-                            OrderModel order = new OrderModel();
-                            order.setTotal_price(total_amount);
-                            order.setDelivery_fee(delivery_fee);
-                            order.setSubtotal_price(subtotal_price);
-                            order.setDishList(dish_list);
-                            order.setDate(time);
-                            orderHistoryReference.setValue(order);
-                            databaseReference.removeValue();
+                            orderHistoryReference = FirebaseDatabase.getInstance("https://wagbaapp-default-rtdb.europe-west1.firebasedatabase.app/")
+                                    .getReference("users/"+uid+"/orders/"+counter.toString());
+                            databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    String restaurant_id = new String();
+                                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                                        DishModel dish = dataSnapshot.getValue(DishModel.class);
+                                        restaurant_id = String.valueOf(dish.getReference().charAt(0));
+                                        dish_list.add(dish);
+                                    }
+                                    restaurantReference = FirebaseDatabase.getInstance("https://wagbaapp-default-rtdb.europe-west1.firebasedatabase.app/")
+                                            .getReference("restaurants/restaurant" + restaurant_id);
+                                    restaurantReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            order = new OrderModel();
+                                            RestaurantModel restaurantModel = snapshot.getValue(RestaurantModel.class);
+                                            restaurant_name = restaurantModel.getName();
+                                            order.setHour_minute(String.valueOf(d.getHours())+":"+String.valueOf(d.getMinutes()));
+                                            order.setTotal_price(total_amount);
+                                            order.setDelivery_fee(delivery_fee);
+                                            order.setSubtotal_price(subtotal_price);
+                                            order.setDishList(dish_list);
+                                            order.setOrder_reference(String.valueOf(counter));
+                                            order.setDate(time);
+                                            order.setStatus("Unconfirmed");
+                                            order.setRestaurant_name(restaurant_name);
+                                            order.setUserAuthId(mAuth.getUid());
+                                            order.setGate(gateNum);
+
+                                            orderHistoryReference.setValue(order);
+                                            databaseReference.removeValue();
+                                            finish();
+                                            Intent intent = new Intent(CheckoutPage.this,RestaurantList.class);
+                                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                            startActivity(intent);
+                                        }
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+                                        }
+                                    });
+                                }
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                }
+                            });
                         }
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) {
-
                         }
                     });
-
                 }
-
             }
         });
-
     }
 }

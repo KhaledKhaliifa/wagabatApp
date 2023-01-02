@@ -37,12 +37,15 @@ public class RestaurantList extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityRestaurantListBinding.inflate(getLayoutInflater());
+        clearCart();
         setContentView(binding.getRoot());
+        mAuth = FirebaseAuth.getInstance();
         recyclerView = findViewById(R.id.restaurant_list_rv);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         list = new ArrayList<>();
         adapter = new RestaurantAdapter(list);
+
 
         binding.userProfileIcon.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,5 +76,11 @@ public class RestaurantList extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         finish();
+    }
+    public void clearCart(){
+        mAuth = FirebaseAuth.getInstance();
+        databaseReference = FirebaseDatabase.getInstance("https://wagbaapp-default-rtdb.europe-west1.firebasedatabase.app/")
+                .getReference("users/"+mAuth.getUid());
+        databaseReference.child("cart").removeValue();
     }
 }

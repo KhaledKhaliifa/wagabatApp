@@ -45,13 +45,21 @@ public class ProfileActivity extends AppCompatActivity {
         }).start();
 
         setContentView(binding.getRoot());
+        binding.orderHistoryBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ProfileActivity.this, OrderHistory.class);
 
+                startActivity(intent);
+            }
+        });
         binding.logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mAuth.signOut();
                 userDao.deleteAll();
                 Intent intent = new Intent(ProfileActivity.this, LoginActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 finish();
                 startActivity(intent);
             }

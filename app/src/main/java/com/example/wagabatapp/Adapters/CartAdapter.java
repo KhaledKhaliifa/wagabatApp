@@ -63,27 +63,27 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
                 dishReference.removeValue();
             }
         });
-//        holder.plus.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Integer count = Integer.valueOf(dish.getItemCount());
-//                count ++;
-//                databaseReference.setValue(count.toString());
-//                //TODO: FIX PLUS AND MINUS BUG WITH RECYCLER VIEW
-//            }
-//        });
-//        holder.minus.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Integer count = Integer.valueOf(dish.getItemCount());
-//                if(count !=1){
-//                    count --;
-//                    databaseReference.setValue(count.toString());
-//                    //TODO: FIX PLUS AND MINUS BUG WITH RECYCLER VIEW
-//
-//                }
-//            }
-//        });
+        holder.plus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Integer count = Integer.valueOf(dish.getItemCount());
+                count ++;
+                databaseReference.setValue(count.toString());
+                //TODO: FIX PLUS AND MINUS BUG WITH RECYCLER VIEW
+            }
+        });
+        holder.minus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Integer count = Integer.valueOf(dish.getItemCount());
+                if(count !=1){
+                    count --;
+                    databaseReference.setValue(count.toString());
+                    //TODO: FIX PLUS AND MINUS BUG WITH RECYCLER VIEW
+
+                }
+            }
+        });
         Integer count = Integer.valueOf(dish.getItemCount());
         Float total_price = dish_price * count;
         holder.item_price.setText(total_price.toString());
